@@ -1,20 +1,38 @@
 import { useCallback, useEffect, useState } from '@lynx-js/react'
-import http from './service/http.jsx'
 
 import './App.css'
+import arrow from './assets/arrow.png'
 
-export async function App() {
+export function App() {
+  interface Product {
+    description: string;
+    // add other properties as needed
+  }
 
-  const [products, setProducts] = useState<any[]>([])
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const data = await response.json();
-  console.log(data);
+  const [data, setData] = useState<Product | null>(null)
+
+  // useEffect(() => {
+  //   fetch('https://fakestoreapi.com/products/1')
+  //           .then(res=>res.json())
+  //           .then(json=>setData(json))
+  // }, [])
   
+
+  if(!data) return <view>Loading...</view>
   return (
     <view>
+      <view className='Background' />
       <view className='App'>
-        
-      <h1>Hi</h1>
+        <view className='Banner'>
+
+          <text className='Title'>David</text>
+          <text className='Subtitle'>{data.description}</text>
+        </view>
+        <view className='Content'>
+          <image src={arrow} className='Arrow' />
+          <text className='Description'>Tap the logo and have fun!</text>
+
+        </view>
       </view>
     </view>
   )
